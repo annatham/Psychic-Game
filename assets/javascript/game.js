@@ -3,55 +3,54 @@ var letters = "abcdefghiklmnopqrstuvwxyz";
 var wins = 0;
 var losses = 0;
 var guessesLeft = 5;
-var usedLet = [];
+var userInput = [];
 var randomLet = randomLet;
 //randomly generate letter
-
 randomLet = letters[Math.floor(Math.random() * letters.length)];
 console.log(random);
 
-function guess() {
+function guesses() {
     random = letters[Math.floor(Math.random() * letters.length)];
     console.log(randomLet);
 }
-//.onkeyup captures the players input as playerGuess
+//.onkeyup is input
 document.onkeyup = function (event) {
-    var userGuess = event.key;
-
-    // HANDELING CORRECT GUESSES
-    //test if players guess equals ranLetter, if true it increments wins by 1, and clears used letters array. Supposed to reset guess # to 10 but starts at 9 instead, 
-    if (userGuess === random) {
-        won++;
-        attempts = 5;
-        usedLet = [];
+    var userInput = event.key;
+    
+   if (userInput === random) {
+        wins++;
+        guessesLeft = 5;
+        userInput = [];
     }
 
-    //tests if players guess Does Not Equal ranLetter and decriments attempts by 1
-    guess();
-    if (userGuess !== random) {
-        attempts--;
+    guesses();
+    if (userInput !== random) {
+        guessesLeft--;
     }
 
-    //when remaining attempts equals zero, lost is incrimented by 1; attempts is reset to 10, and used letters array is cleared
-    if (attempts == 0) {
-        lost++;
-        usedLet = []
-        attempts = 5;
+    if (guessesLeft == 0) {
+        losses++;
+        userInput = [];
+        guessesLeft = 5;
     }
+//letter is only used once
+    if (userInput.indexOf(userInput) >= 0) {
 
-    //this 'if' prevents a letter selected a 2nd time from being written to the usedArray again, although it still counts as a guess
-    if (usedLet.indexOf(userGuess) >= 0) {
-
-    } else {
-        //this pushes the players incorrect guess to the usedArray and writes it to the HTML
-        usedLet.push(userGuess);
-        document.getElementById('userGuess').innerHTML = usedLet;
-        console.log(usedLet);
+    } 
+    
+    else {
+//user input is recorded
+        userInput.push(userInput) = userInput;
+        console.log(userInput);
     }
+// Display the user guesses and wins/losses.
 
-    //     directions.textContent = "";
+    document.getElementById('wins') = wins;
+    document.getElementById('losses') = losses;
+    document.getElementById('guessesLeft') = guessesLeft;
 
-//     // Display the user and computer guesses, and wins/losses/ties.
+}   
+//     directions.textContent = ""
 //     wins.textContent = "Wins: " + wins;
 //     losses.textContent = "Losses: " + losses;
 //     guessesLeft.textContent = "Guesses Left: " + ties;
