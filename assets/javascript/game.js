@@ -1,71 +1,60 @@
-var computerChoices = ["r", "p", "s"];
-
-// Creating variables to hold the number of wins, losses, and ties. They start at 0.
+// create all variables for game
+var letters = "abcdefghiklmnopqrstuvwxyz";
 var wins = 0;
 var losses = 0;
-var guessesLeft = 0;
+var guessesLeft = 5;
+var usedLet = [];
+var randomLet = randomLet;
+//randomly generate letter
 
-// Create variables that hold references to the places in the HTML where we want to display things.
-var directions = document.getElementById("directions");
-var wins = document.getElementById("wins");
-var losses = document.getElementById("losses");
-var guessesLef = document.getElementById("guessesLeft");
-var user = document.getElementById("guesses");
+randomLet = letters[Math.floor(Math.random() * letters.length)];
+console.log(random);
 
-// This function is run whenever the user presses a key.
-document.onkeyup = function(event) {
+function guess() {
+    random = letters[Math.floor(Math.random() * letters.length)];
+    console.log(randomLet);
+}
+//.onkeyup captures the players input as playerGuess
+document.onkeyup = function (event) {
+    var userGuess = event.key;
 
-  // Determines which key was pressed.
-  var user = event.key;
-
-  // Randomly chooses a choice from the options array. This is the Computer's guess.
-  var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-
-  // Only run the following code block if the user presses "r" or "p" or "s".
-  if ((user === "r") || (user === "p") || (user === "s")) {
-
-    // If we choose rock and the computer guesses scissors, increment our wins variable.
-    if ((user === "r") && (computerGuess === "s")) {
-      wins++;
+    // HANDELING CORRECT GUESSES
+    //test if players guess equals ranLetter, if true it increments wins by 1, and clears used letters array. Supposed to reset guess # to 10 but starts at 9 instead, 
+    if (userGuess === random) {
+        won++;
+        attempts = 5;
+        usedLet = [];
     }
 
-    // If we choose rock and the computer guesses paper, increment our losses variable.
-    if ((user === "r") && (computerGuess === "p")) {
-      losses++;
+    //tests if players guess Does Not Equal ranLetter and decriments attempts by 1
+    guess();
+    if (userGuess !== random) {
+        attempts--;
     }
 
-    // If we choose scissors and the computer guesses rock, increment our losses variable.
-    if ((user === "s") && (computerGuess === "r")) {
-      losses++;
+    //when remaining attempts equals zero, lost is incrimented by 1; attempts is reset to 10, and used letters array is cleared
+    if (attempts == 0) {
+        lost++;
+        usedLet = []
+        attempts = 5;
     }
 
-    // If we choose scissors and the computer guesses paper, increment our wins variable.
-    if ((user === "s") && (computerGuess === "p")) {
-      wins++;
+    //this 'if' prevents a letter selected a 2nd time from being written to the usedArray again, although it still counts as a guess
+    if (usedLet.indexOf(userGuess) >= 0) {
+
+    } else {
+        //this pushes the players incorrect guess to the usedArray and writes it to the HTML
+        usedLet.push(userGuess);
+        document.getElementById('userGuess').innerHTML = usedLet;
+        console.log(usedLet);
     }
 
-    // If we choose paper and the computer guesses rock, increment our wins variable.
-    if ((user === "p") && (computerGuess === "r")) {
-      wins++;
-    }
+    //     directions.textContent = "";
 
-    // If we choose paper and the computer guesses scissors, increment our losses variable.
-    if ((user === "p") && (computerGuess === "s")) {
-      losses++;
-    }
+//     // Display the user and computer guesses, and wins/losses/ties.
+//     wins.textContent = "Wins: " + wins;
+//     losses.textContent = "Losses: " + losses;
+//     guessesLeft.textContent = "Guesses Left: " + ties;
+//     user.textContent = "Your Guesses So Far: " + user;
 
-    // If we choose the same thing as the computer, increment our ties variable.
-    if (user === computerGuess) {
-      ties++;
-    }
-
-    // Hide the directions
-    directions.textContent = "";
-
-    // Display the user and computer guesses, and wins/losses/ties.
-    userChoiceText.textContent = "You chose: " + user;
-    computerChoiceText.textContent = "The computer chose: " + computerGuess;
-    winsText.textContent = "wins: " + wins;
-    lossesText.textContent = "losses: " + losses;
-    tiesText.textContent = "ties: " + ties;
-  }
+//   }
