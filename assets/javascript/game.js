@@ -34,22 +34,21 @@ document.onkeyup = function (event) {
         guessesLeft = 5;
         attempts = [];
     } 
+        
+    if (userInput !== randomLet) {
+        guessesLeft--;
+    }
 
     if (guessesLeft === 0) {
         losses++;
         guessesLeft = 5;
-    }
-        
-    if (userInput !== randomLet) {
-        guessesLeft--;
         attempts = [];
-
     }
 
 //letter is only used once
-    // if (userInput.indexOf(userInput) >= 0) {
+    if (userInput.indexOf(userInput) >= 0) {
 
-
+    }
     
 // //user input is recorded
 //         userInput.push(userInput) = userInput;
@@ -72,11 +71,8 @@ document.onkeyup = function (event) {
 
 //reset function
 
-  function reset() {
-    var btn = document.createElement("BUTTON");
-    btn.innerHTML = "Reset Game";
-    document.body.appendChild(btn);
-    userInput.length = 0;
+  function myFunction() {
+    document.getElementById("wins", "losses", "guessesLeft","attempts", "userInput").reset();
 
   }
     
