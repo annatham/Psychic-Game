@@ -2,7 +2,7 @@
 var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 var wins = 0;
 var losses = 0;
-var guessesLeft = 6;
+var guessesLeft = 5;
 var attempts = [];
 
 //user input
@@ -29,7 +29,7 @@ document.onkeyup = function (event) {
 
    if (userInput === randomLet) {
         wins++;
-        guessesLeft = 6;
+        guessesLeft = 5;
         attempts = [];
     } 
         
@@ -39,7 +39,7 @@ document.onkeyup = function (event) {
 
     if (guessesLeft === 0) {
         losses++;
-        guessesLeft = 6;
+        guessesLeft = 5;
         attempts = [];
     }
 
